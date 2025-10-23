@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class UsuarioModel extends Model
+{
+    protected $table      = 'usuario';
+    protected $primaryKey = 'id';
+
+    protected $allowedFields = [
+        'nome', 
+        'email',
+        'senha'
+    ];
+
+
+    protected $validationRules    = [
+        'nome'  => 'required|min_length[3]|max_length[255]',
+        'email' => 'required|valid_email|is_unique[usuario.email]',
+        'senha' => 'required|min_length[6]',
+    ];
+    
+protected $validationMessages = [
+        'nome' => [
+            'required'    => 'O campo Nome é obrigatório.',
+            'min_length'  => 'O campo Nome deve ter pelo menos 3 caracteres.',
+            'max_length'  => 'O campo Nome não pode exceder 255 caracteres.',
+        ],
+        'email' => [
+            'required'    => 'O campo Email é obrigatório.',
+            'valid_email' => 'Por favor, insira um endereço de email válido.',
+            'is_unique'   => 'Este email já está em uso.',
+        ],
+        'senha' => [
+            'required'    => 'O campo Senha é obrigatório.',
+            'min_length'  => 'A Senha deve ter pelo menos 6 caracteres.',
+        ],
+    ];
+       protected $useTimestamps = true;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
+}

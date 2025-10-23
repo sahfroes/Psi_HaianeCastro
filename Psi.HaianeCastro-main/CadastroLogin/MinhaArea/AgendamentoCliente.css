@@ -1,0 +1,210 @@
+/* --- Configurações Globais e Variáveis --- */
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #00377e;
+    --body-bg-color: #eaf6ff; 
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --text-color: #333;
+    --text-color-light: #fff;
+    --logo-color: #0056b3; 
+    --font-family: 'Poppins', sans-serif;
+    --border-radius: 16px;
+    --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* --- ESTILOS GERAIS --- */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--body-bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden; 
+}
+
+.background-flowers {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/floral.png');
+    opacity: 0.05; 
+    z-index: -1; 
+}
+
+a { 
+    text-decoration: none; 
+}
+
+/* --- ESTRUTURA PRINCIPAL DA PÁGINA --- */
+.container { 
+    width: 100%; 
+    max-width: 950px; 
+    z-index: 1; 
+}
+
+.header { 
+    margin-bottom: 2rem; 
+    color: #444; 
+}
+
+.header .logo { 
+    display: flex; 
+    align-items: center; 
+    gap: 0.75rem; 
+    font-weight: 500; 
+    font-size: 1.1rem; 
+    color: var(--logo-color); 
+}
+
+.logo-img { 
+    height: 35px; 
+    width: auto; 
+}
+
+.header h1 { 
+    font-size: 2.5rem; 
+    font-weight: 600; 
+    margin-top: 0.5rem; 
+}
+
+/* --- ESTILOS DA PÁGINA DE AGENDAMENTO INTERATIVO --- */
+.content-container {
+    background-color: var(--card-bg);
+    padding: 2rem 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-top: 2rem;
+}
+
+.agendamento-layout {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap; /* Permite quebrar em telas menores */
+}
+
+.calendario-container {
+    flex: 1;
+    min-width: 300px;
+}
+
+.horarios-container {
+    flex: 1;
+    min-width: 300px;
+}
+
+.calendario-container h3,
+.horarios-container h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--logo-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Estilos para customizar o calendário Flatpickr */
+.flatpickr-calendar {
+    width: 100% !important;
+    box-shadow: none !important;
+    border: 1px solid #ddd;
+}
+
+.flatpickr-day.selected {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.flatpickr-day:hover {
+    background: rgba(13, 110, 253, 0.1);
+}
+
+/* Grid de Horários */
+.horarios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+}
+
+.horarios-placeholder {
+    grid-column: 1 / -1; /* Ocupa a linha inteira */
+    color: #777;
+    font-style: italic;
+}
+
+.time-slot-btn {
+    padding: 1rem;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #fff;
+    transition: all 0.2s ease;
+}
+
+.time-slot-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.time-slot-btn.selected {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    border-color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Botão de Confirmação */
+.confirmacao-container {
+    margin-top: 2rem;
+    border-top: 1px solid #eee;
+    padding-top: 2rem;
+}
+
+#confirmar-agendamento:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Estilos dos Botões de Ação Genéricos */
+.action-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.action-button.primary { 
+    background-color: var(--primary-color); 
+    color: var(--text-color-light); 
+}
+
+.action-button.primary:hover { 
+    background-color: var(--secondary-color); 
+}
+
+.action-button.tertiary { 
+    background-color: transparent; 
+    color: #555; 
+}
+
+.action-button.tertiary:hover { 
+    background-color: #e9ecef; 
+}

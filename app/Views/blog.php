@@ -11,6 +11,7 @@
   <title>Meu Blog</title>
 </head>
 
+
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
@@ -834,14 +835,17 @@ p {
 
 
 
+
 <body>
   <div class="wrapper">
     <nav class="menu">
       <img class="logo" src="fotos/logo02.png" alt="logo" />
-      <a class="a-menu" href="index.html">Sobre mim</a>
-      <a class="a-menu" href="index.html">Serviços</a>
-      <a class="a-menu" href="#blog">Blog</a>
-      <a class="a-menu" href="index.html">Contato</a>
+     
+       <a class="a-menu" href="<?= base_url('sobre') ?>">Sobre mim</a>
+      <a class="a-menu" href="<?= base_url('servicos') ?>">Serviços</a>
+      <a class="a-menu" href="<?= base_url('blog') ?>">Blog</a>
+      <a class="a-menu" href="<?= base_url('login') ?>">Contato</a>
+    
     </nav>
 
     <section>
@@ -1040,8 +1044,40 @@ p {
   </div>
 
   <script>
+document.querySelectorAll('.accordion-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const target = document.querySelector(header.getAttribute('data-target'));
+    const isOpen = target.classList.contains('open');
+    
+    // Fecha todas as abas
+    document.querySelectorAll('.accordion-body').forEach(body => body.classList.remove('open'));
+    document.querySelectorAll('.accordion-header').forEach(h => {
+      h.textContent = h.textContent.replace('▴', '▾');
+      h.classList.remove('active');
+    });
 
+    // Abre a aba clicada se não estiver aberta
+    if (!isOpen) {
+      target.classList.add('open');
+      header.classList.add('active');
+      header.textContent = header.textContent.replace('▾', '▴');
+    }
+  });
+});
+
+window.addEventListener('scroll', function () {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 100) { // A partir de 100px de rolagem
+      navbar.classList.add('scrolled');
+  } else {
+      navbar.classList.remove('scrolled');
+  }
+});
   </script>
 </body>
+
+
+
+
 
 </html>

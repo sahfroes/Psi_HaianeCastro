@@ -9,7 +9,7 @@
   <script src="https://unpkg.com/scrollreveal"></script>
   <link rel="icon" href="fotos/logo.png" type="image/png">
   <title>PSI.Haianecastro</title>
-</head>
+
 
 <style>
 
@@ -1738,17 +1738,17 @@ body {
 
 
 
-
+</head>
 
 
 <body>
   <div class="wrapper">
     <nav class="menu">
       <img class="logo" src="fotos/logo02.png" alt="logo" />
-      <a class="a-menu" href="sobre">Sobre mim</a>
-      <a class="a-menu" href="servicos">Serviços</a>
-      <a class="a-menu" href="blog">Blog</a>
-      <a class="a-menu" href="CadastroLogin/login.html">Login</a>
+     <a class="a-menu" href="<?= base_url('sobre') ?>">Sobre mim</a>
+      <a class="a-menu" href="<?= base_url('servicos') ?>">Serviços</a>
+      <a class="a-menu" href="<?= base_url('blog') ?>">Blog</a>
+      <a class="a-menu" href="<?= base_url('login') ?>">Login</a>
     </nav>
     <main>
       <section class="module parallax parallax-1">
@@ -1928,7 +1928,42 @@ body {
         </li>
       </ul>
     </nav>
-    <script src="java.js"></script>
+<script>
+window.addEventListener('scroll', function () {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 100) { // A partir de 100px de rolagem
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+if (window.innerWidth > 500) {
+  window.sr = ScrollReveal({ reset: true });
+
+  sr.reveal('.tituloprincipal2', { duration: 1300, origin: 'top', distance: '20px' });
+  sr.reveal('.bannerin', { duration: 1200, origin: 'top', distance: '20px' });
+  sr.reveal('.img1', { duration: 1900, origin: 'top', distance: '20px' });
+  sr.reveal('.cardimg', { duration: 1200, origin: 'top', distance: '20px' });
+  sr.reveal('.cardtext', { duration: 1900, origin: 'top', distance: '20px' });
+  sr.reveal('.h1text', { duration: 1200, origin: 'top', distance: '20px' });
+  sr.reveal('.principal', { duration: 1900, origin: 'top', distance: '20px' });
+  sr.reveal('.meublog', { duration: 1200, origin: 'top', distance: '20px' });
+  sr.reveal('.blo', { duration: 1900, origin: 'top', distance: '20px' });
+  sr.reveal('.baixoclass', { duration: 2100, origin: 'top', distance: '20px' });
+  sr.reveal('.servicos', { duration: 1200, origin: 'top', distance: '20px' });
+  sr.reveal('.centro', { duration: 1200, origin: 'top', distance: '20px' });
+  sr.reveal('.image-section2', { duration: 1200, origin: 'top', distance: '20px' });
+}
+window.addEventListener('scroll', () => {
+  const menu = document.querySelector('.menu');
+  if (window.scrollY > 50) { // Ajuste o valor de 50 pixels conforme necessário
+    menu.classList.add('scrolled');
+  } else {
+    menu.classList.remove('scrolled');
+  }
+});
+
+</script>
   </div>
 </body>
 

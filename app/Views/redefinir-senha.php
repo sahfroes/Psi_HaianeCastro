@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Psi.HaianeCastro</title>
+    <title>Recuperar Senha - Psi.HaianeCastro</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link rel="stylesheet" href="login.css">
-    <link rel="icon" type="image/png" href="MinhaArea/Fotos/logo.png">
-</head>
-
-<style>
+  
+    <style>
     /* --- CONFIGURAÇÕES GLOBAIS E VARIÁVEIS --- */
 :root {
     --primary-color: #0d6efd;
@@ -206,136 +203,80 @@ a:hover { text-decoration: underline; }
     .navigation-grid { grid-template-columns: 1fr; gap: 1rem; }
     .card-primary { grid-row: auto; grid-column: auto; min-height: 160px; }
 }
-</style>
 
 
+  </style>
+
+    <link rel="icon" type="image/png" href="fotos/sua-logo.png">
+</head>
 <body>
-
-
     <div class="background-flowers"></div>
 
-<div class="login-page-container">
+    <div class="login-page-container">
         <div class="login-card">
             <div class="logo">
-                <img src="<?= base_url('fotos/logo02.png') ?>" alt="Logo">
+                <img src="fotos/logo02.png" alt="Logo">
             </div>
-
-            <?php if (session()->getFlashdata('success')): ?>
-                <div class="message success">
-                    <?= session()->getFlashdata('success') ?>
-                </div>
-            <?php endif; ?>
-
-            <?php if (session()->getFlashdata('error')): ?>
-                <div class="message error">
-                    <?= session()->getFlashdata('error') ?>
-                </div>
-            <?php endif; ?>
 
             <div class="avatar">
-                <span class="material-icons">person</span>
+                <span class="material-icons">lock_reset</span>
             </div>
             
-            <form action="<?= base_url('login') ?>" method="post">
-                <?= csrf_field() ?>
-                
-                <div class="profile-selector-group">
-                    <label class="group-label">Entrar como:</label>
-                    <div class="profile-options">
-                        <div class="profile-option">
-                            <input type="radio" id="perfilPaciente" name="tipo" value="paciente" <?= old('tipo', 'paciente') == 'paciente' ? 'checked' : '' ?>>
-                            <label for="perfilPaciente">Paciente</label>
-                        </div>
-                        <div class="profile-option">
-                            <input type="radio" id="perfilPsicologa" name="tipo" value="psicologa" <?= old('tipo') == 'psicologa' ? 'checked' : '' ?>>
-                            <label for="perfilPsicologa">Psicóloga</label>
-                        </div>
-                    </div>
-                </div>
+            <form id="esqueceuSenhaForm">
+                <p style="margin-bottom: 1.5rem; color: #555;">
+                    Perdeu sua senha? Por favor, digite seu endereço de e-mail. Você receberá um link para criar uma nova senha.
+                </p>
 
                 <div class="input-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" value="<?= old('email') ?>" required>
+                    <label for="email">Seu E-mail de Cadastro</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
 
-                <div class="input-group">
-                    <label for="senha">Senha</label>
+                  <div class="input-group">
+                    <label for="senha">Digite a nova senha</label>
                     <input type="password" id="senha" name="senha" required>
                 </div>
-                
-                <div class="remember-me">
-                    <input type="checkbox" id="remember" name="remember">
-                    <label for="remember">Lembrar meu e-mail</label>
-                </div>
-                
-                <button type="submit" class="login-button">Entrar</button>
+
+                <button type="submit" class="login-button">Redefinir Senha</button>
             </form>
-            <div class="extra-links">
-                <a href="<?= base_url('redefinir-senha')?>">Esqueceu a senha?</a>
-                <a href="<?= base_url('cadastro')?>">Fazer cadastro</a>
+            
+            <div class="extra-links" style="justify-content: center;">
+                <a href="<?= base_url('login')?>">Voltar para o Login</a>
             </div>
         </div>
     </div>
 
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    const cadastroForm = document.getElementById('cadastroForm');
-    const nomeInput = document.getElementById('nome');
-    const emailInput = document.getElementById('emailCadastro');
-    const senhaInput = document.getElementById('senhaCadastro');
-    const confirmarSenhaInput = document.getElementById('confirmarSenha');
+    const esqueceuSenhaForm = document.getElementById('esqueceuSenhaForm');
+    const emailInput = document.getElementById('email');
 
-    cadastroForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Impede o envio padrão do formulário
+    esqueceuSenhaForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Impede o envio do formulário
 
-        const nome = nomeInput.value.trim();
         const email = emailInput.value.trim();
-        const senha = senhaInput.value;
-        const confirmarSenha = confirmarSenhaInput.value;
 
-        // 1. Validação de campos vazios
-        if (nome === '' || email === '' || senha === '' || confirmarSenha === '') {
-            alert('Por favor, preencha todos os campos.');
+        // 1. Valida se o campo de e-mail está preenchido
+        if (email === '') {
+            alert('Por favor, digite seu endereço de e-mail.');
             return;
         }
 
-        // 2. Validação do formato de e-mail
+        // 2. Valida o formato do e-mail
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert('Por favor, insira um e-mail válido.');
+            alert('Por favor, insira um e-mail com formato válido.');
             return;
         }
 
-        // 3. Validação de força da senha (mínimo 6 caracteres)
-        if (senha.length < 6) {
-            alert('A senha deve ter no mínimo 6 caracteres.');
-            return;
-        }
+        // 3. Simula o envio e exibe a mensagem de confirmação
+        // (Em um projeto real, aqui seria enviado o e-mail para o servidor)
+        alert('Se houver uma conta associada a este e-mail, um link para redefinição de senha foi enviado. Por favor, verifique sua caixa de entrada e spam.');
 
-        // 4. Validação de confirmação de senha
-        if (senha !== confirmarSenha) {
-            alert('As senhas não coincidem. Por favor, tente novamente.');
-            senhaInput.focus(); // Coloca o foco no campo de senha
-            return;
-        }
-
-        // Se todas as validações passarem, exibe sucesso e redireciona
-        alert('Cadastro realizado com sucesso!\nVocê será redirecionado para a página de login.');
-
-        // Limpa os campos do formulário
-        cadastroForm.reset();
-
-        // Redireciona para a página de login após 2 segundos
+        // 4. Redireciona de volta para a página de login após alguns segundos
         setTimeout(function() {
-            window.location.href = 'login.';
-        }, 2000); // 2000 milissegundos = 2 segundos
-        
-        /*
-        Em um cenário real, aqui você enviaria os dados (nome, email, senha)
-        para um servidor para que eles fossem salvos em um banco de dados.
-        A lógica de 'fetch' que você tinha no seu código original entraria aqui.
-        */
+            window.location.href = 'login.php';
+        }, 3000); // 3000 milissegundos = 3 segundos
     });
 });
     </script>

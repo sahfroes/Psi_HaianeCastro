@@ -29,7 +29,7 @@ class Database extends Config
         'hostname'     => 'localhost',
         'username'     => 'root',
         'password'     => '',
-        'database'     => 'consultorio_psicologia',
+        'database'     => 'consultorio_novo',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,

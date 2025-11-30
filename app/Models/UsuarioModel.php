@@ -12,14 +12,16 @@ class UsuarioModel extends Model
     protected $allowedFields = [
         'nome', 
         'email',
-        'senha'
+        'senha',
+        'tipo'
     ];
 
 
     protected $validationRules    = [
         'nome'  => 'required|min_length[3]|max_length[255]',
-        'email' => 'required|valid_email|is_unique[usuario.email]',
+        'email' => 'required|valid_email|is_unique[usuarios.email]',
         'senha' => 'required|min_length[6]',
+        'tipo'  => 'required'
     ];
     
 protected $validationMessages = [
@@ -37,9 +39,16 @@ protected $validationMessages = [
             'required'    => 'O campo Senha é obrigatório.',
             'min_length'  => 'A Senha deve ter pelo menos 6 caracteres.',
         ],
+        'tipo' => [ 
+            'required' => 'Você deve selecionar um tipo de conta (Paciente ou Psicóloga).'
+        ]
     ];
+
+
+
        protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+    protected $editdField  = 'edit_at';
 }

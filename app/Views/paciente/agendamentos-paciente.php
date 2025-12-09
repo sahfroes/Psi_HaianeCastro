@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Agenda - Psi.HaianeCastro</title>
+    <title>Agendamento de Sessão - Psi.HaianeCastro</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- CSS do Flatpickr (Biblioteca de Calendário) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-    <!-- CSS dedicado para esta página -->
-    <link rel="stylesheet" href="AgendamentoDoutora.css">
+    <link rel="stylesheet" href="AgendamentoCliente.css">
     <link rel="icon" type="image/png" href="Fotos/logo.png">
 </head>
 
 <style>
-/* --- Configurações Globais e Variáveis --- */
+    /* --- Configurações Globais e Variáveis --- */
 :root {
     --primary-color: #0d6efd;
     --secondary-color: #00377e;
@@ -232,8 +230,8 @@ a {
 
 </style>
 
-
 <body>
+
     <div class="background-flowers"></div>
 
     <main class="container">
@@ -242,38 +240,38 @@ a {
                 <img src="Fotos/logo.png" alt="Logo" class="logo-img">
                 <span>Haiane Castro</span>
             </div>
-            <h1>Minha Agenda</h1>
+            <h1>Agendar Sessão</h1>
         </header>
 
         <div class="content-container">
-            <div class="agenda-layout">
-                <!-- Coluna da Esquerda: Calendário -->
+            <div class="agendamento-layout">
                 <div class="calendario-container">
-                    <h3>Calendário de Consultas</h3>
-                    <div id="calendario-doutora"></div>
+                    <h3>1. Selecione uma data</h3>
+                    <div id="calendario-agendamento"></div>
                 </div>
 
-                <!-- Coluna da Direita: Detalhes do Dia -->
-                <div class="detalhes-dia-container">
-                    <h3 id="detalhes-titulo">Agendamentos do Dia</h3>
-                    <div id="lista-agendamentos" class="lista-agendamentos">
-                        <p class="placeholder-text">Selecione um dia com consultas no calendário para ver os detalhes.</p>
+                <div class="horarios-container">
+                    <h3 id="horarios-titulo">2. Escolha um horário</h3>
+                    <div id="horarios-grid" class="horarios-grid">
+                        <p class="horarios-placeholder">Selecione uma data no calendário para ver os horários disponíveis.</p>
+                    </div>
+                    <div class="confirmacao-container">
+                        <button id="confirmar-agendamento" class="action-button primary" disabled>
+                            Confirmar Agendamento
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <a href="\area_psicologa" class="action-button tertiary" style="margin-top: 2rem;">
+            <a href="\area_paciente" class="action-button tertiary" style="margin-top: 2rem;">
                 <i class="fas fa-arrow-left"></i> Voltar ao Painel
             </a>
         </div>
     </main>
     
-    <!-- JS do Flatpickr (Biblioteca de Calendário) -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <!-- JS do Flatpickr em Português -->
     <script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
-    <!-- Seu JS para esta página -->
-    <script src="AgendamentoDoutora.js"></script>
+    <script src="AgendamentoCliente.js"></script>
 </body>
 
 <script>

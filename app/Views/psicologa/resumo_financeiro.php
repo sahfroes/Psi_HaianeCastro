@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- CSS dedicado para esta página -->
-    
+    <link rel="stylesheet" href="Financeiro.css">
     <link rel="icon" type="image/png" href="Fotos/logo.png">
 </head>
 
@@ -292,8 +292,8 @@ a {
 }
 </style>
 
-<body>
 
+<body>
     <div class="background-flowers"></div>
 
     <main class="container">
@@ -334,7 +334,7 @@ a {
                     </table>
                 </div>
             </div>
-             <a href="AreaPisicologa.html" class="action-button tertiary" style="margin-top: 2rem;">
+             <a href="\area_psicologa" class="action-button tertiary" style="margin-top: 2rem;">
                 <i class="fas fa-arrow-left"></i> Voltar ao Painel
             </a>
         </div>
@@ -349,8 +349,11 @@ a {
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+    <script src="Financeiro.js"></script>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
 
     // --- DADOS DE EXEMPLO (Simula um banco de dados) ---
     const financeData = {
@@ -481,6 +484,5 @@ a {
     });
 });
 
-    </script>
-</body>
+</script>
 </html>

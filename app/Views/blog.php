@@ -841,11 +841,14 @@ p {
     <nav class="menu">
       <img class="logo" src="fotos/logo02.png" alt="logo" />
      
-       <a class="a-menu" href="<?= base_url('sobre') ?>">Sobre mim</a>
-      <a class="a-menu" href="<?= base_url('servicos') ?>">Serviços</a>
-      <a class="a-menu" href="<?= base_url('blog') ?>">Blog</a>
-      <a class="a-menu" href="<?= base_url('login') ?>">Contato</a>
+      
+    <a class="a-menu" href="<?= base_url() ?>#sobre">Sobre mim</a>
     
+    <a class="a-menu" href="<?= base_url() ?>#servicos">Serviços</a>
+    
+    <a class="a-menu" href="<?= base_url('blog') ?>">Blog</a>
+    <a class="a-menu" href="<?= base_url('login') ?>">Login</a>
+
     </nav>
 
     <section>

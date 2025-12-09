@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Cadastro - Psi.HaianeCastro</title>
+    <title>Cadastrar Paciente - Psi.HaianeCastro</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet" href="MeuCadastro.css">
+    <!-- CSS dedicado para esta página -->
+    <link rel="stylesheet" href="CadastroPacientes.css">
     <link rel="icon" type="image/png" href="Fotos/logo.png">
 </head>
 
@@ -30,7 +30,7 @@
     --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* --- ESTILOS GERAIS (para todas as páginas) --- */
+/* --- ESTILOS GERAIS --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -53,50 +53,22 @@ body {
     z-index: -1; 
 }
 
-a { color: var(--primary-color); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a { text-decoration: none; }
 
-/* --- ESTILOS DAS PÁGINAS DE LOGIN, CADASTRO, ETC. --- */
-/* ... (todos os estilos de formulário de login que já fizemos) ... */
-
-
-/* --- ESTILOS DOS PAINÉIS (Minha Área / Area Psicologa) --- */
+/* --- ESTRUTURA PRINCIPAL DA PÁGINA --- */
 .container { width: 100%; max-width: 950px; z-index: 1; }
 .header { margin-bottom: 2rem; color: #444; }
 .header .logo { display: flex; align-items: center; gap: 0.75rem; font-weight: 500; font-size: 1.1rem; color: var(--logo-color); }
 .logo-img { height: 35px; width: auto; }
 .header h1 { font-size: 2.5rem; font-weight: 600; margin-top: 0.5rem; }
 
-.navigation-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 1.5rem;
-}
-/* ... (todos os estilos dos cards dos painéis que já fizemos) ... */
-
-
-/* --- ESTILOS DA PÁGINA 'MEU CADASTRO' --- */
-.profile-form-container {
+/* --- ESTILOS DA PÁGINA DE CADASTRO DE PACIENTE --- */
+.content-container {
     background-color: var(--card-bg);
     padding: 2rem 2.5rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     margin-top: 2rem;
-}
-
-.profile-form-container h2 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--logo-color);
-    margin-bottom: 0.5rem;
-}
-
-.profile-form-container p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 1.5rem;
 }
 
 .form-grid {
@@ -141,12 +113,6 @@ a:hover { text-decoration: underline; }
     box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
 }
 
-.form-group input[readonly] {
-    background-color: #f0f0f0;
-    cursor: not-allowed;
-    color: #777;
-}
-
 .form-actions {
     display: flex;
     gap: 1rem;
@@ -176,14 +142,6 @@ a:hover { text-decoration: underline; }
     background-color: var(--secondary-color);
 }
 
-.action-button.secondary {
-    background-color: #6c757d;
-    color: var(--text-color-light);
-}
-.action-button.secondary:hover {
-    background-color: #5a6268;
-}
-
 .action-button.tertiary {
     background-color: transparent;
     color: #555;
@@ -192,22 +150,16 @@ a:hover { text-decoration: underline; }
     background-color: #e9ecef;
 }
 
-
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 900px) {
-    /* ... (regras de responsividade que já fizemos) ... */
-}
+/* Responsividade para o formulário */
 @media (max-width: 768px) {
     .form-grid {
         grid-template-columns: 1fr;
     }
-    .profile-form-container {
+    .content-container {
         padding: 1.5rem;
     }
 }
-@media (max-width: 600px) {
-    /* ... (regras de responsividade que já fizemos) ... */
-}
+
 </style>
 
 
@@ -220,45 +172,43 @@ a:hover { text-decoration: underline; }
                 <img src="Fotos/logo.png" alt="Logo" class="logo-img">
                 <span>Haiane Castro</span>
             </div>
-            <h1>Minha área</h1>
+            <h1>Cadastrar Novo Paciente</h1>
         </header>
 
-        <div class="profile-form-container">
-            <h2>Minhas Informações</h2>
-            <p>Aqui você pode visualizar e editar suas informações de cadastro.</p>
+        <div class="content-container">
+            <p style="margin-bottom: 2rem; font-size: 1.1rem; color: #555;">
+                Preencha os campos abaixo para adicionar um novo paciente ao sistema.
+            </p>
             
-            <form id="profileForm">
+            <form id="cadastroPacienteForm">
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="nomeCompleto">Nome Completo</label>
-                        <input type="text" id="nomeCompleto"  required>
+                        <input type="text" id="nomeCompleto" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">E-mail (não pode ser alterado)</label>
-                        <input type="email" id="email"  readonly>
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" required>
                     </div>
                     <div class="form-group">
                         <label for="telefone">Telefone / WhatsApp</label>
-                        <input type="tel" id="telefone" >
+                        <input type="tel" id="telefone">
                     </div>
                     <div class="form-group">
                         <label for="dataNascimento">Data de Nascimento</label>
-                        <input type="date" id="dataNascimento" >
+                        <input type="date" id="dataNascimento">
                     </div>
                     <div class="form-group form-group-full">
                         <label for="endereco">Endereço</label>
-                        <input type="text" id="endereco" >
+                        <input type="text" id="endereco">
                     </div>
                 </div>
                 
                 <div class="form-actions">
                     <button type="submit" class="action-button primary">
-                        <i class="fas fa-save"></i> Salvar Alterações
+                        <i class="fas fa-user-plus"></i> Cadastrar Paciente
                     </button>
-                    <a href="\redefinir_senha" class="action-button secondary">
-                        <i class="fas fa-key"></i> Alterar Senha
-                    </a>
-                    <a href="\area_paciente" class="action-button tertiary">
+                    <a href="\area_psicologa" class="action-button tertiary">
                         <i class="fas fa-arrow-left"></i> Voltar ao Painel
                     </a>
                 </div>
@@ -266,25 +216,40 @@ a:hover { text-decoration: underline; }
         </div>
     </main>
     
-    <script src="MeuCadastro.js"></script>
+    <script src="CadastroPacientes.js"></script>
 </body>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    const profileForm = document.getElementById('profileForm');
+    const cadastroForm = document.getElementById('cadastroPacienteForm');
+    const nomeInput = document.getElementById('nomeCompleto');
+    const emailInput = document.getElementById('email');
 
-    if(profileForm) {
-        profileForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio real do formulário
-            
-            // Aqui, em um projeto real, você pegaria os dados e enviaria para um servidor
-            const nome = document.getElementById('nomeCompleto').value;
-            console.log("Salvando dados para:", nome);
+    cadastroForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Impede o envio real do formulário
 
-            // Simula uma resposta de sucesso
-            alert("Dados salvos com sucesso!");
-        });
-    }
+        const nome = nomeInput.value.trim();
+        const email = emailInput.value.trim();
+
+        // Validação básica (verifica se os campos obrigatórios estão preenchidos)
+        if (nome === '' || email === '') {
+            alert('Por favor, preencha pelo menos o Nome e o E-mail do paciente.');
+            return;
+        }
+
+        // Simulação de cadastro bem-sucedido
+        alert(`Paciente "${nome}" cadastrado com sucesso!`);
+
+        // Em um cenário real, aqui você enviaria os dados para um banco de dados
+        // Ex: saveDataToServer({ nome, email, ... });
+
+        // Limpa o formulário para um novo cadastro
+        cadastroForm.reset();
+
+        // Coloca o foco de volta no primeiro campo para facilitar o próximo cadastro
+        nomeInput.focus();
+    });
 });
+
 </script>
+
 </html>

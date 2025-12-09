@@ -215,14 +215,14 @@ body {
     <main class="container">
         <header class="header">
             <div class="logo">
-                <img src="Fotos/logo.png" alt="Logo Raiane Castro" class="logo-img">
+                <img src="../fotos/logo.png" alt="Logo Raiane Castro" class="logo-img">
                 <span>Haiane Castro</span>
             </div>
             <h1>Minha área</h1>
         </header>
 
         <nav class="navigation-grid">
-            <a href="AgendamentoCliente.html" class="card card-primary" id="agendamentos">
+            <a href="/agendamentos-paciente" class="card card-primary" id="agendamentos">
                 <div class="card-content">
                     <i class="fa-solid fa-calendar-days"></i>
                     <span>Meus agendamentos</span>
@@ -232,17 +232,17 @@ body {
                 </div>
             </a>
 
-            <a href="MeuCadastro.html" class="card" id="cadastro">
+            <a href="/cadastro-paciente" class="card" id="cadastro">
                 <i class="fa-solid fa-user-pen"></i>
                 <span>Meu cadastro</span>
             </a>
 
-            <a href="Pagamentos.html" class="card" id="pagamentos">
+            <a href="<?= base_url('dividas') ?>"class="card" id="dividas">
                 <i class="fa-solid fa-credit-card"></i>
-                <span>Pagamentos</span>
+                <span>Dividas</span>
             </a>
 
-            <a href="Documentos.html" class="card" id="documentos">
+            <a href="/documentos" class="card" id="documentos">
                 <i class="fa-solid fa-file-lines"></i>
                 <span>Documentos</span>
             </a>

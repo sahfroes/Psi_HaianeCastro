@@ -1745,8 +1745,8 @@ body {
   <div class="wrapper">
     <nav class="menu">
       <img class="logo" src="fotos/logo02.png" alt="logo" />
-     <a class="a-menu" href="<?= base_url('sobre') ?>">Sobre mim</a>
-      <a class="a-menu" href="<?= base_url('servicos') ?>">Serviços</a>
+     <a class="a-menu" href="#sobre">Sobre mim</a>
+      <a class="a-menu" href="#servicos">Serviços</a>
       <a class="a-menu" href="<?= base_url('blog') ?>">Blog</a>
       <a class="a-menu" href="<?= base_url('login') ?>">Login</a>
     </nav>
@@ -1830,7 +1830,7 @@ body {
       </section>
       </section>
       <div class="baixoclass">
-        <a href="blog.html"><button class="cta-button">Ler Mais</button></a>
+        <a href="blog"><button class="cta-button">Ler Mais</button></a>
       </div>
     </main>
 

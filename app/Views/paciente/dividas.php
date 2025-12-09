@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- Apontando para o arquivo CSS dedicado desta página -->
-    
-    <link rel="icon" type="image/png" href="fotos/logo.png">
+    <link rel="stylesheet" href="Pagamentos.css">
+    <link rel="icon" type="image/png" href="Fotos/logo.png">
 </head>
 
 <style>
@@ -141,6 +141,7 @@ a { text-decoration: none; }
 .action-button.tertiary { background-color: transparent; color: #555; }
 .action-button.tertiary:hover:not(:disabled) { background-color: #e9ecef; }
 </style>
+
 <body>
     <div class="background-flowers"></div>
 
@@ -215,8 +216,11 @@ a { text-decoration: none; }
         </div>
     </main>
 
-    <script >
-        document.addEventListener('DOMContentLoaded', function() {
+    <script src="pagamentos.js"></script>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
 
     // Seleciona todos os botões de upload da página
     const uploadButtons = document.querySelectorAll('.upload-btn');
@@ -260,6 +264,6 @@ a { text-decoration: none; }
     });
 
 });
-    </script>
-</body>
+</script>
+
 </html>

@@ -212,7 +212,7 @@ body {
     <main class="container">
         <header class="header">
             <div class="logo">
-                <img src="Fotos/logo.png" alt="Logo Raiane Castro" class="logo-img">
+                <img src="../fotos/logo.png" alt="Logo Raiane Castro" class="logo-img">
                 <span>Haiane Castro</span>
             </div>
             <h1>Minha área</h1>
@@ -220,7 +220,7 @@ body {
 
         <nav class="navigation-grid">
             
-            <a href="AgendamentoDoutora.html" class="card card-primary" id="agendamentos">
+            <a href="\agenda" class="card card-primary" id="agendamentos">
                 <div class="card-content">
                     <i class="fa-solid fa-calendar-days"></i>
                     <span>Próximos Agendamentos</span>
@@ -230,25 +230,25 @@ body {
                 </div>
             </a>
             
-            <a href="Lembretes.html" class="card" id="lembretes">
+            <a href="\lembretes" class="card" id="lembretes">
                 <i class="fa-solid fa-list-check"></i>
                 <span>Lembretes e Tarefas Pendentes</span>
             </a>
-            <a href="CadastroPacientes.html" class="card card-secondary" id="cadastro-pacientes">
+            <a href="\cadastro_paciente" class="card card-secondary" id="cadastro-pacientes">
                 <i class="fa-solid fa-user-plus"></i>
                 <span>Cadastro de Pacientes</span>
             </a>
 
-            <a href="Financeiro.html" class="card" id="financeiro">
+            <a href="\resumo_financeiro" class="card" id="financeiro">
                 <i class="fa-solid fa-credit-card"></i>
                 <span>Resumo Financeiro Rápido</span>
             </a>
-            <a href="AcompanhamentoPacientes.html" class="card card-secondary" id="acompanhamento-pacientes">
+            <a href="\acompanhamento_pacientes" class="card card-secondary" id="acompanhamento-pacientes">
                 <i class="fa-solid fa-users"></i>
                 <span>Acompanhamento de pacientes</span>
             </a>
 
-            <a href="GerenciarDocumentos.html" class="card" id="documentos">
+            <a href="\gerenciar_documentos" class="card" id="documentos">
                 <i class="fa-solid fa-file-lines"></i>
                 <span>Documentos</span>
             </a>

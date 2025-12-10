@@ -48,9 +48,8 @@ $routes->view('redefinir_senha', 'paciente/redefinir_senha');
 
 $routes->view('acompanhamento_paciente', 'psicologa/acompanhamento_paciente');
 $routes->view('agenda', 'psicologa/agenda');
-$routes->view('cadastro_paciente', 'psicologa/cadastro_paciente');
 $routes->view('gerenciar_documentos', 'psicologa/gerenciar_documentos');
-$routes->view('lembretes', 'psicologa/lembretes');
+
 $routes->view('resumo_financeiro', 'psicologa/resumo_financeiro');
  
 

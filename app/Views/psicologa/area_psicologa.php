@@ -111,7 +111,8 @@ body {
     text-decoration: none;
     color: var(--text-color);
     box-shadow: var(--shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
+     box-shadow 0.3s ease;
     word-wrap: break-word; /* Garante que o texto quebre corretamente */
 }
 
@@ -229,21 +230,12 @@ body {
                     <i class="fa-solid fa-arrow-right"></i>
                 </div>
             </a>
-            
-            <a href="\lembretes" class="card" id="lembretes">
-                <i class="fa-solid fa-list-check"></i>
-                <span>Lembretes e Tarefas Pendentes</span>
-            </a>
-            <a href="\cadastro_paciente" class="card card-secondary" id="cadastro-pacientes">
-                <i class="fa-solid fa-user-plus"></i>
-                <span>Cadastro de Pacientes</span>
-            </a>
 
             <a href="\resumo_financeiro" class="card" id="financeiro">
                 <i class="fa-solid fa-credit-card"></i>
                 <span>Resumo Financeiro Rápido</span>
             </a>
-            <a href="\acompanhamento_pacientes" class="card card-secondary" id="acompanhamento-pacientes">
+            <a href="\acompanhamento_paciente" class="card card-secondary" id="acompanhamento-pacientes">
                 <i class="fa-solid fa-users"></i>
                 <span>Acompanhamento de pacientes</span>
             </a>

@@ -261,6 +261,9 @@ a:hover { text-decoration: underline; }
                     <a href="\area_paciente" class="action-button tertiary">
                         <i class="fas fa-arrow-left"></i> Voltar ao Painel
                     </a>
+
+                  
+
                 </div>
             </form>
         </div>

@@ -210,7 +210,7 @@ a { text-decoration: none; }
                 </table>
             </div>
 
-             <a href="MinhaArea.html" class="action-button tertiary" style="margin-top: 2rem;">
+             <a href="\area_paciente" class="action-button tertiary" style="margin-top: 2rem;">
                 <i class="fas fa-arrow-left"></i> Voltar ao Painel
             </a>
         </div>

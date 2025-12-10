@@ -1,72 +1,97 @@
 
-# CodeIgniter 4 Application Starter
+# 🧠 Plataforma de Gerenciamento Clínico: Psicologia & Pacientes
 
-## What is CodeIgniter?
+[![Status](https://img.shields.io/badge/Status-Pronto%20para%20Deploy-success)](README.md)
+[![Framework](https://img.shields.io/badge/Framework-CodeIgniter%204-red)](https://codeigniter.com/)
+[![Arquitetura](https://img.shields.io/badge/Padrão-MVC-blue)](README.md)
+[![PHP Versão](https://img.shields.io/badge/PHP-8.1%2B-informational)](README.md)
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+---
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## ✨ Visão Geral do Projeto
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+Esta aplicação é uma plataforma web para gestão clínica, desenvolvida para digitalizar e otimizar o fluxo de trabalho entre **Psicólogas** e **Pacientes**. Utiliza o **CodeIgniter 4** e o padrão **MVC** para garantir uma estrutura de código limpa e segura. O sistema oferece ambientes de trabalho isolados por perfil, gerenciando agendamentos, finanças e documentos com foco total na confidencialidade dos dados.
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+---
 
-## Installation & updates
+## 🚀 Funcionalidades Chave
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+O acesso é estritamente controlado e segregado em dois perfis, definidos no momento do cadastro.
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+### 👩‍⚕️ Portal da Psicóloga
+O back-end fornece acesso completo às ferramentas de gestão:
 
-## Setup
+| Funcionalidade | Descrição |
+| :--- | :--- |
+| **📅 Agenda Completa** | Visualização, edição e gestão de todos os agendamentos. |
+| **💰 Controle Financeiro** | Acesso ao **Resumo Financeiro** e atualização do status de **Pagamento** (Pago / Não Pago) por paciente. |
+| **📄 Gestão de Documentos** | **Upload**, armazenamento seguro e disponibilização de documentos clínicos (como laudos) ao paciente. |
+| **👥 Dados do Paciente** | Gerenciamento de informações básicas e registro de acompanhantes. |
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+### 👤 Portal do Paciente
+O paciente possui acesso exclusivo e limitado às suas informações:
 
-## Important Change with index.php
+| Funcionalidade | Descrição |
+| :--- | :--- |
+| **🗓️ Agendamento** | Marcação de novas consultas e visualização do histórico de sessões. |
+| **💸 Status de Pagamento** | Confirmação e acompanhamento pessoal do status de quitação para organização. |
+| **🗂️ Documentos Recebidos** | Acesso seguro e visualização dos documentos compartilhados pela Psicóloga. |
+| **📝 Meu Perfil** | Visualização e atualização de dados cadastrais. |
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+---
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+## 🛠️ Arquitetura e Segurança
 
-**Please** read the user guide for a better explanation of how CI4 works!
+### Back-end e API
 
-## Repository Management
+O coração do sistema é o back-end em **CodeIgniter 4 / PHP**, que atua como **API RESTful** para o front-end, trocando dados primariamente em formato **JSON**.
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+* **Padrão MVC:** Garantia de separação lógica: **Model** (Interação com o Banco de Dados), **View** (Interface) e **Controller** (Lógica de Negócio e Roteamento).
+* **Protocolo:** Comunicação estrita via **HTTPS**, utilizando métodos como `GET`, `POST`, `PUT/PATCH` e `DELETE`.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+### 🛡️ Segurança de Dados
 
-## Server Requirements
+A proteção das informações é prioritária e implementada através de métodos de segurança:
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+* **Hashing de Senhas (com Salt):** As senhas são protegidas por **Hashing** robusto (não reversível), utilizando as funções nativas do CodeIgniter, garantindo que as credenciais nunca sejam armazenadas em texto simples no banco de dados.
+* **Autorização por Perfil:** O back-end verifica o nível de acesso (`Psicóloga` ou `Paciente`) em cada chamada à API para impedir o acesso não autorizado a recursos.
+* **Prevenção de SQL Injection:** Utilização de **Consultas Preparadas** (*Prepared Statements*), padrão do *framework*, para proteger o banco de dados contra ataques de injeção.
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+---
 
- [!WARNING]
- - The end of life date for PHP 7.4 was November 28, 2022.
- - The end of life date for PHP 8.0 was November 26, 2023.
- - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
- - The end of life date for PHP 8.1 will be December 31, 2025.
+## ⚙️ Instalação e Configuração
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Esta seção é crucial para configurar o ambiente de desenvolvimento.
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+### 1. Requisitos do Servidor
 
+Certifique-se de que seu ambiente atende aos seguintes requisitos:
 
+* **PHP** versão **8.1** ou superior.
+* Extensões PHP obrigatórias: **`intl`** e **`mbstring`**.
+* Extensões recomendadas: **`json`**, **`mysqlnd`** (para MySQL) e **`libcurl`**.
 
+### 2. Passo a Passo
+
+1.  **Clonar o Repositório:**
+    ```bash
+    git clone [LINK_DO_SEU_REPOSITORIO]
+    cd nome-do-projeto
+    ```
+2.  **Instalar Dependências:**
+    ```bash
+    composer install
+    ```
+3.  **Configurar o Ambiente (`.env`):**
+    * Copie `env` para **`.env`**.
+    * Ajuste `app.baseURL` e configure as credenciais do seu banco de dados na seção `database.*`.
+
+### 3. Configuração de Segurança (Servidor Web)
+
+🚨 **IMPORTANTE:** O servidor web (Apache/Nginx) deve ser configurado para apontar a raiz do projeto para a pasta **`public/`**. Esta é uma medida de segurança essencial do CodeIgniter para proteger o código-fonte.
+
+### 4. Manutenção
+
+Para manter as dependências e o *framework* atualizados:
+```bash
+composer update

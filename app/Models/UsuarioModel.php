@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class UsuarioModel extends Model
 {
     protected $table      = 'usuarios';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_usuarios';
 
     protected $allowedFields = [
         'nome', 
@@ -16,6 +16,17 @@ class UsuarioModel extends Model
         'tipo'
     ];
 
+    protected $beforeInsert = ['hashPassword'];
+    protected $beforeUpdate = ['hashPassword'];
+
+    protected function hashPassword(array $data)
+    {
+        if (isset($data['data']['senha'])) {
+            // Usa o algoritmo de hash seguro do PHP
+            $data['data']['senha'] = password_hash($data['data']['senha'], PASSWORD_DEFAULT);
+        }
+        return $data;
+    }
 
     protected $validationRules    = [
         'nome'  => 'required|min_length[3]|max_length[255]',
@@ -51,4 +62,5 @@ protected $validationMessages = [
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
     protected $editdField  = 'edit_at';
+
 }

@@ -8,6 +8,9 @@
 
 ---
 
+## Link da Documentaçaõ do Projeto atualizado
+(https://docs.google.com/document/d/1XexBNkLAtCd-hYz8-HhHbuvMjUGgEjqC95zYz3tBl1w/edit?tab=t.0)
+
 ## ✨ Visão Geral do Projeto
 
 Esta aplicação é uma plataforma web para gestão clínica, desenvolvida para digitalizar e otimizar o fluxo de trabalho entre **Psicólogas** e **Pacientes**. Utiliza o **CodeIgniter 4** e o padrão **MVC** para garantir uma estrutura de código limpa e segura. O sistema oferece ambientes de trabalho isolados por perfil, gerenciando agendamentos, finanças e documentos com foco total na confidencialidade dos dados.
@@ -95,3 +98,5 @@ Certifique-se de que seu ambiente atende aos seguintes requisitos:
 Para manter as dependências e o *framework* atualizados:
 ```bash
 composer update
+
+

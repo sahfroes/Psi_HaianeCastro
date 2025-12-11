@@ -245,10 +245,7 @@ a:hover { text-decoration: underline; }
                         <label for="dataNascimento">Data de Nascimento</label>
                         <input type="date" id="dataNascimento" >
                     </div>
-                    <div class="form-group form-group-full">
-                        <label for="endereco">Endereço</label>
-                        <input type="text" id="endereco" >
-                    </div>
+                   
                 </div>
                 
                 <div class="form-actions">

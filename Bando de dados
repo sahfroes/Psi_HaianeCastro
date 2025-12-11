@@ -1,0 +1,39 @@
+CREATE DATABASE IF NOT EXISTS consultorio_psicologia;
+-- 3. Seleciona o banco de dados
+USE consultorio_psicologia;
+
+-- 4. Cria a tabela 'usuarios' com as colunas CORRETAS
+CREATE TABLE usuarios (
+    id_usuarios INT AUTO_INCREMENT PRIMARY KEY,
+    
+    -- CORRIGIDO: de 'nome_completo' para 'nome' (para bater com o seu Controller)
+    nome VARCHAR(255) NOT NULL, 
+    
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    tipo ENUM('paciente', 'psicologa') NOT NULL,
+    
+    -- ADICIONADO: Seu 'UsuarioModel' usa Timestamps, então essas colunas são necessárias
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE agendamentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    -- CHAVE ESTRANGEIRA: O nome DEVE ser id_usuario para bater com o Controller/Model
+    id_usuario INT NOT NULL,
+
+    -- Data e Hora da sessão
+    data_hora DATETIME NOT NULL,
+
+    status ENUM('pendente', 'confirmado', 'cancelado') NOT NULL DEFAULT 'confirmado',
+
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    -- DEFINIÇÃO DA CHAVE ESTRANGEIRA
+    -- Referencia: AGORA APONTA PARA 'id_usuarios' na tabela 'usuarios'.
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuarios)
+);

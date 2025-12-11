@@ -62,5 +62,7 @@ protected $validationMessages = [
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
     protected $editdField  = 'edit_at';
-
+    
 }
+
+

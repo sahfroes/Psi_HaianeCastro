@@ -228,6 +228,41 @@ a {
     background-color: #e9ecef; 
 }
 
+
+/* --- ESTILOS DA LISTA DE AGENDAMENTOS (PSICÓLOGA) --- */
+.detalhes-dia-container {
+    /* Define a altura e scroll se a lista for muito longa */
+    max-height: 450px; 
+    overflow-y: auto;
+}
+
+.agendamento-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.agendamento-item span {
+    display: inline-block;
+}
+
+.placeholder-text {
+    padding: 20px;
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}
+
+/* Opcional: Estilo responsivo */
+@media (max-width: 768px) {
+    .agendamento-layout {
+        flex-direction: column;
+    }
+}
+
 </style>
 
 <body>
@@ -275,9 +310,9 @@ a {
 </body>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    
-    // Elementos da página
+    document.addEventListener('DOMContentLoaded', function () {
+
+    // ELEMENTOS DA TELA
     const calendarioEl = document.getElementById('calendario-agendamento');
     const horariosGridEl = document.getElementById('horarios-grid');
     const horariosTituloEl = document.getElementById('horarios-titulo');
@@ -286,90 +321,128 @@ a {
     let dataSelecionada = null;
     let horarioSelecionado = null;
 
-    // Horários disponíveis FAKES (para simulação)
-    const horariosDisponiveis = {
-        'weekday': ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"], // Seg a Sex
-        'saturday': ["09:00", "10:00", "11:00"], // Sábado
-        'sunday': [] // Domingo sem horários
-    };
+    // ======================================================
+    // BUSCAR HORÁRIOS DISPONÍVEIS
+    // ======================================================
+    function buscarHorarios(data) {
+        horarioSelecionado = null;
+        confirmarBtn.disabled = true;
 
-    // 1. INICIALIZAÇÃO DO CALENDÁRIO (FLATPICKR)
+        horariosTituloEl.innerText = `2. Horários para ${data}`;
+        horariosGridEl.innerHTML =
+            `<p class="horarios-placeholder">
+                <i class="fas fa-spinner fa-spin"></i> Buscando horários...
+             </p>`;
+
+        fetch(`/agendamento/getHorariosDisponiveis?data=${data}`)
+            .then(res => res.json())
+            .then(resposta => {
+                horariosGridEl.innerHTML = '';
+
+                if (resposta.status === 'success' && resposta.horarios.length > 0) {
+                    resposta.horarios.forEach(horario => {
+                        const btn = document.createElement('button');
+                        btn.className = 'time-slot-btn';
+                        btn.textContent = horario;
+                        btn.dataset.horario = horario;
+                        horariosGridEl.appendChild(btn);
+                    });
+                } else {
+                    horariosGridEl.innerHTML =
+                        `<p class="horarios-placeholder">
+                            Nenhum horário disponível para esta data.
+                         </p>`;
+                }
+            })
+            .catch(() => {
+                horariosGridEl.innerHTML =
+                    `<p class="horarios-placeholder" style="color:red;">
+                        Erro ao carregar horários.
+                     </p>`;
+            });
+    }
+
+    // ======================================================
+    // FLATPICKR (CALENDÁRIO)
+    // ======================================================
     const calendario = flatpickr(calendarioEl, {
-        inline: true, // Mostra o calendário diretamente na página
-        minDate: "today", // Não permite selecionar datas passadas
-        locale: "pt", // Traduz para português
-        dateFormat: "d/m/Y",
-        
-        // Função que é executada toda vez que uma data é selecionada
-        onChange: function(selectedDates, dateStr, instance) {
-            dataSelecionada = dateStr;
-            horarioSelecionado = null; // Reseta o horário ao mudar a data
-            confirmarBtn.disabled = true; // Desabilita o botão de confirmar
-
-            const diaDaSemana = selectedDates[0].getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
-            
-            let horarios = [];
-            if (diaDaSemana === 0) { // Domingo
-                horarios = horariosDisponiveis.sunday;
-            } else if (diaDaSemana === 6) { // Sábado
-                horarios = horariosDisponiveis.saturday;
-            } else { // Dias de semana
-                horarios = horariosDisponiveis.weekday;
+        inline: true,
+        locale: 'pt',
+        minDate: 'today',
+        dateFormat: 'd/m/Y',
+        onChange: function (datas, dataStr) {
+            if (datas.length) {
+                dataSelecionada = dataStr;
+                buscarHorarios(dataStr);
             }
-
-            atualizarHorarios(horarios, dateStr);
-        },
+        }
     });
 
-    // 2. FUNÇÃO PARA ATUALIZAR OS HORÁRIOS NA TELA
-    function atualizarHorarios(horarios, dataFormatada) {
-        horariosTituloEl.innerText = `2. Horários para ${dataFormatada}`;
-        horariosGridEl.innerHTML = ''; // Limpa os horários antigos
+    // DATA DE HOJE
+    const hoje = new Date();
+    calendario.setDate(hoje);
 
-        if (horarios.length === 0) {
-            horariosGridEl.innerHTML = '<p class="horarios-placeholder">Não há horários disponíveis para esta data.</p>';
+    const hojeStr = hoje.toLocaleDateString('pt-BR');
+    dataSelecionada = hojeStr;
+    buscarHorarios(hojeStr);
+
+    // ======================================================
+    // CLICK NOS HORÁRIOS
+    // ======================================================
+    horariosGridEl.addEventListener('click', function (e) {
+        if (!e.target.classList.contains('time-slot-btn')) return;
+
+        document
+            .querySelectorAll('.time-slot-btn')
+            .forEach(btn => btn.classList.remove('selected'));
+
+        e.target.classList.add('selected');
+        horarioSelecionado = e.target.dataset.horario;
+        confirmarBtn.disabled = false;
+    });
+
+    // ======================================================
+    // CONFIRMAR AGENDAMENTO
+    // ======================================================
+    confirmarBtn.addEventListener('click', function () {
+
+        if (!dataSelecionada || !horarioSelecionado) {
+            alert('Selecione uma data e um horário.');
             return;
         }
 
-        horarios.forEach(horario => {
-            const btn = document.createElement('button');
-            btn.className = 'time-slot-btn';
-            btn.textContent = horario;
-            btn.dataset.horario = horario;
-            horariosGridEl.appendChild(btn);
-        });
-    }
+        confirmarBtn.disabled = true;
+        confirmarBtn.innerText = 'Agendando...';
 
-    // 3. LÓGICA DE CLIQUE NOS HORÁRIOS
-    horariosGridEl.addEventListener('click', function(event) {
-        // Remove a seleção de qualquer outro botão
-        const todosBotoes = horariosGridEl.querySelectorAll('.time-slot-btn');
-        todosBotoes.forEach(btn => btn.classList.remove('selected'));
+        const dados = new URLSearchParams();
+        dados.append('data', dataSelecionada);
+        dados.append('horario', horarioSelecionado);
 
-        // Se o clique foi em um botão de horário
-        if (event.target.classList.contains('time-slot-btn')) {
-            const btnClicado = event.target;
-            btnClicado.classList.add('selected');
-            horarioSelecionado = btnClicado.dataset.horario;
-            confirmarBtn.disabled = false; // Habilita o botão de confirmar
-        }
+        fetch('/agendamento/salvarAgendamento', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: dados
+        })
+            .then(res => res.json())
+            .then(resposta => {
+                if (resposta.status === 'success') {
+                    alert(resposta.message);
+                    buscarHorarios(dataSelecionada);
+                } else {
+                    alert(resposta.message || 'Erro ao agendar.');
+                }
+            })
+            .catch(() => {
+                alert('Erro de comunicação com o servidor.');
+            })
+            .finally(() => {
+                confirmarBtn.innerText = 'Confirmar Agendamento';
+            });
     });
 
-    // 4. LÓGICA DO BOTÃO DE CONFIRMAÇÃO
-    confirmarBtn.addEventListener('click', function() {
-        if (dataSelecionada && horarioSelecionado) {
-            alert(`Agendamento confirmado com sucesso!\n\nData: ${dataSelecionada}\nHorário: ${horarioSelecionado}\n\nProfissional: Haiane Castro`);
-            
-            // Aqui você poderia redirecionar ou limpar a seleção
-            calendario.clear();
-            horariosGridEl.innerHTML = '<p class="horarios-placeholder">Selecione uma data no calendário para ver os horários disponíveis.</p>';
-            horariosTituloEl.innerText = `2. Escolha um horário`;
-            confirmarBtn.disabled = true;
-        } else {
-            alert("Por favor, selecione uma data e um horário.");
-        }
-    });
 });
-</script>
 
+</script>
 </html>

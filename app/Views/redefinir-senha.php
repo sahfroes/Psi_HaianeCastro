@@ -210,6 +210,7 @@ a:hover { text-decoration: underline; }
     <link rel="icon" type="image/png" href="fotos/sua-logo.png">
 </head>
 <body>
+
     <div class="background-flowers"></div>
 
     <div class="login-page-container">
@@ -221,10 +222,10 @@ a:hover { text-decoration: underline; }
             <div class="avatar">
                 <span class="material-icons">lock_reset</span>
             </div>
-            
+            <form method="post" action="<?= base_url('processar-redefinicao-senha') ?>">
             <form id="esqueceuSenhaForm">
                 <p style="margin-bottom: 1.5rem; color: #555;">
-                    Perdeu sua senha? Por favor, digite seu endereço de e-mail. Você receberá um link para criar uma nova senha.
+                  Por favor, digite seu endereço de e-mail de cadastro e a nova senha que deseja utilizar.
                 </p>
 
                 <div class="input-group">
@@ -238,6 +239,7 @@ a:hover { text-decoration: underline; }
                 </div>
 
                 <button type="submit" class="login-button">Redefinir Senha</button>
+                
             </form>
             
             <div class="extra-links" style="justify-content: center;">
@@ -246,39 +248,6 @@ a:hover { text-decoration: underline; }
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    const esqueceuSenhaForm = document.getElementById('esqueceuSenhaForm');
-    const emailInput = document.getElementById('email');
-
-    esqueceuSenhaForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Impede o envio do formulário
-
-        const email = emailInput.value.trim();
-
-        // 1. Valida se o campo de e-mail está preenchido
-        if (email === '') {
-            alert('Por favor, digite seu endereço de e-mail.');
-            return;
-        }
-
-        // 2. Valida o formato do e-mail
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Por favor, insira um e-mail com formato válido.');
-            return;
-        }
-
-        // 3. Simula o envio e exibe a mensagem de confirmação
-        // (Em um projeto real, aqui seria enviado o e-mail para o servidor)
-        alert('Se houver uma conta associada a este e-mail, um link para redefinição de senha foi enviado. Por favor, verifique sua caixa de entrada e spam.');
-
-        // 4. Redireciona de volta para a página de login após alguns segundos
-        setTimeout(function() {
-            window.location.href = 'login.php';
-        }, 3000); // 3000 milissegundos = 3 segundos
-    });
-});
-    </script>
+  
 </body>
 </html>

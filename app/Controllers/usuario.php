@@ -55,7 +55,7 @@ class Usuario extends Controller
             'nome'  => $this->request->getPost('nome'),
             'email' => $this->request->getPost('email'),
             'tipo'  => $this->request->getPost('tipo'),
-            'senha' => password_hash($this->request->getPost('senha'), PASSWORD_DEFAULT) // Criptografa a senha
+            'senha' => $this->request->getPost('senha') // Passa a senha em texto plano (o Model irá criptografar)
         ];
 
         // 4. Salva no banco
@@ -77,9 +77,9 @@ class Usuario extends Controller
 
             // 5. Redireciona para o painel correto
             if ($data['tipo'] == 'psicologa') {
-                return redirect()->to('/psicologa/area-psicologa'); // Rota do painel da psicóloga
+                return redirect()->to('/area_psicologa'); // Rota do painel da psicóloga
             } else {
-                return redirect()->to('/paciente/area-paciente'); // Rota do painel do paciente
+                return redirect()->to('/area_paciente'); // Rota do painel do paciente
             }
 
         } else {
@@ -158,24 +158,54 @@ class Usuario extends Controller
     /**
      * Processa a redefinição de senha (FUNÇÃO CORRIGIDA)
      */
-    public function processarRedefinicaoSenha()
-    {
-        $email = $this->request->getPost('email');
-        $novaSenha = $this->request->getPost('senha');
+ /**   public function processarRedefinicaoSenha()
+   * {
+       *  $email = $this->request->getPost('email');
+       * $novaSenha = $this->request->getPost('senha');
 
-        $model = new UsuarioModel();
-        $usuario = $model->where('email', $email)->first();
+     *   $model = new UsuarioModel();
+      *  $usuario = $model->where('email', $email)->first();
 
-        if ($usuario) {
-            // CORRIGIDO: Usa o $model para atualizar e criptografa a nova senha
-            $novaSenhaHash = password_hash($novaSenha, PASSWORD_DEFAULT);
-            $model->update($usuario['id'], ['senha' => $novaSenhaHash]);
+      *  if ($usuario) {
+      *      // CORRIGIDO: Usa o $model para atualizar e criptografa a nova senha
+      *      $novaSenhaHash = password_hash($novaSenha, PASSWORD_DEFAULT);
+       *     $model->update($usuario['id_usuarios'], ['senha' => $novaSenhaHash]);
             
-            return redirect()->to('/login')->with('success', 'Senha redefinida com sucesso. Faça login com sua nova senha.');
-        } else {
-            return redirect()->back()->with('error', 'Endereço de e-mail não encontrado.');      
-        }
+       *     return redirect()->to('/login')->with('success', 'Senha redefinida com sucesso. Faça login com sua nova senha.');
+       * } else {
+       *     return redirect()->back()->with('error', 'Endereço de e-mail não encontrado.');      
+       * }
+  *  }
+*/
+    public function processarRedefinicaoSenha()
+{
+    $email = $this->request->getPost('email');
+    $novaSenha = $this->request->getPost('senha');
+
+    $model = new UsuarioModel();
+    $usuario = $model->where('email', $email)->first();
+
+    if ($usuario) {
+        
+        // 1. Passamos a nova senha em TEXTO PURO (não hashada)
+        $data = [
+            'senha' => $novaSenha 
+        ];
+
+        // 2. O CodeIgniter Model (e o beforeUpdate) fará o hash
+        // O $beforeUpdate é acionado pelo método update(), 
+        // mas é preciso garantir que ele funcione corretamente com $this->update().
+        $model->update($usuario['id_usuarios'], $data);
+        
+        return redirect()->to('/login')->with('success', 'Senha redefinida com sucesso. Faça login com sua nova senha.');
+    } else {
+        return redirect()->back()->with('error', 'Ocorreu um erro na redefinição. Verifique o e-mail digitado.');
     }
+}
+
+    // No seu Controller App\Controllers\Usuario.php
+
+
 
     /**
      * Faz o logout do usuário
@@ -208,3 +238,4 @@ class Usuario extends Controller
     // e a 'update()' incompleta)
 
 }
+
